@@ -1,0 +1,67 @@
+{% api %}{% image %}{% video %}
+<article class="post-1 post type-post status-publish format-standard hentry category-uncategorized">
+	<div class="post-format-single standard"></div>
+
+	<div class="entry-wrap">
+		<div class="entry-content">
+			
+<header class="entry-header">	
+	<h1>{{ term | ucwords }}</h1>	
+</header>
+<br/>
+			<p>
+			<b>{{ term | ucwords }}</b> - 
+			{% for index, item in api %}
+			{% if index > 2 %}
+			{{item.title | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | trim | strtolower | ucfirst | remove_common_words }},
+			{{item.description | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | remove '/' | remove 'html' | remove 'http' | remove '.com' | remove '.org' | remove '.net' | trim | strtolower | ucfirst }}.
+			{% endif %}
+			{% endfor %}
+			</p>
+			
+			{% if videos.0.link != '' %}
+			<p>			
+			<center><iframe class="youtube-player" type="text/html" width="500" height="350" src="http://www.youtube.com/embed/{{ videos.0.link | get_video_id }}" frameborder="2"></iframe></center>
+			<center><caption>{{ videos.0.title }}</caption></center>
+			</p>
+			{% endif %}
+
+			<div style="text-align:center">
+			{% for index, item in images %}{% if index > 0 %}{% if index < 2 %}
+			<img width="480px" src="{{ item.mediaurl }}" alt="{{ item.title }}" title="{{ item.title }}">
+			<br>
+			<caption>{{ item.title | ucfirst }}</caption>
+			{% endif %}{% endif %}{% endfor %}
+			</div>
+
+			<p>
+				{% for index, item in api %}
+				{% if index > 4 %}
+				{{item.description | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | remove '/' | remove 'html' | remove 'http' | remove '.com' | remove '.org' | remove '.net' | trim | strtolower | ucfirst }}.
+				{% endif %}
+			</p>
+
+			<p>
+				{% if index > 6 %}
+				{{item.description | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | remove '/' | remove 'html' | remove 'http' | remove '.com' | remove '.org' | remove '.net' | trim | strtolower | ucfirst }}.
+				{% endif %}
+				{% endfor %}
+			</p>
+			
+<H2>RELATED FOR: {{ term | ucwords }}</H2>
+<ul>
+			{% for index, item in api %}{% if index > 0 %}{% if index < 5 %} 
+		<li>
+		<a href="{{ item.title | build_permalink_for 'none'  }}" target="_blank">
+		{{item.title  | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | remove '/' | remove 'html' | remove 'http' | remove '.com' | remove '.org' | remove '.net' | trim | strtolower | ucfirst }}</a>
+		<div>
+		{{item.description | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | remove '/' | remove 'html' | remove 'http' | remove '.com' | remove '.org' | remove '.net' | trim | strtolower | ucfirst }}.
+		</div>
+		</li>
+			{% endif %}{% endif %}
+			{% endfor %}
+</ul>
+
+		</div>
+	</div>
+</article>
