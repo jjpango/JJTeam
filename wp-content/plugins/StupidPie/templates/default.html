@@ -1,67 +1,52 @@
-{% api %}{% image %}{% video %}
-<article class="post-1 post type-post status-publish format-standard hentry category-uncategorized">
-	<div class="post-format-single standard"></div>
+    {% api %}{% image %}{% video %} 
+    <article class="post-1 post type-post status-publish format-standard hentry category-uncategorized">
+        <div class="post-format-single standard"></div>
+        <div class="entry-wrap">
+            <div class="entry-content">
+    <p><strong>{{ term }}</strong> &raquo; {% for index, item in api %}
+    {% if index == 3%}{{item.description | remove ' ...' | trim | strtolower | ucfirst }}. {% endif %}{% if index == 5%}{{item.description | remove ' ...' | trim | strtolower | ucfirst }}. {% endif %}{% if index == 1%}{{item.description | remove ' ...' | trim | strtolower | ucfirst }}.{% endif %}
+    {% endfor %}</p>
+                <p style="text-align:center">
+                    <img src="{{ images.3.mediaurl }}" alt="{{images.3.title}}" title="{{images.5.title}}" width="100%"><br/>                    
+                </p>
 
-	<div class="entry-wrap">
-		<div class="entry-content">
-			
-<header class="entry-header">	
-	<h1>{{ term | ucwords }}</h1>	
-</header>
-<br/>
-			<p>
-			<b>{{ term | ucwords }}</b> - 
-			{% for index, item in api %}
-			{% if index > 2 %}
-			{{item.title | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | trim | strtolower | ucfirst | remove_common_words }},
-			{{item.description | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | remove '/' | remove 'html' | remove 'http' | remove '.com' | remove '.org' | remove '.net' | trim | strtolower | ucfirst }}.
-			{% endif %}
-			{% endfor %}
-			</p>
-			
-			{% if videos.0.link != '' %}
-			<p>			
-			<center><iframe class="youtube-player" type="text/html" width="500" height="350" src="http://www.youtube.com/embed/{{ videos.0.link | get_video_id }}" frameborder="2"></iframe></center>
-			<center><caption>{{ videos.0.title }}</caption></center>
-			</p>
-			{% endif %}
+    <p>{% for index, item in api %}
+    {% if index == 6%}{{item.description | remove ' ...' | trim | strtolower | ucfirst }}. {% endif %}{% if index == 8%}{{item.description | remove ' ...' | trim | strtolower | ucfirst }}. {% endif %}{% if index == 7%}{{item.description | remove ' ...' | trim | strtolower | ucfirst }}.{% endif %}
+    {% endfor %}</p>
 
-			<div style="text-align:center">
-			{% for index, item in images %}{% if index > 0 %}{% if index < 2 %}
-			<img width="480px" src="{{ item.mediaurl }}" alt="{{ item.title }}" title="{{ item.title }}">
-			<br>
-			<caption>{{ item.title | ucfirst }}</caption>
-			{% endif %}{% endif %}{% endfor %}
-			</div>
 
-			<p>
-				{% for index, item in api %}
-				{% if index > 4 %}
-				{{item.description | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | remove '/' | remove 'html' | remove 'http' | remove '.com' | remove '.org' | remove '.net' | trim | strtolower | ucfirst }}.
-				{% endif %}
-			</p>
 
-			<p>
-				{% if index > 6 %}
-				{{item.description | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | remove '/' | remove 'html' | remove 'http' | remove '.com' | remove '.org' | remove '.net' | trim | strtolower | ucfirst }}.
-				{% endif %}
-				{% endfor %}
-			</p>
-			
-<H2>RELATED FOR: {{ term | ucwords }}</H2>
-<ul>
-			{% for index, item in api %}{% if index > 0 %}{% if index < 5 %} 
-		<li>
-		<a href="{{ item.title | build_permalink_for 'none'  }}" target="_blank">
-		{{item.title  | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | remove '/' | remove 'html' | remove 'http' | remove '.com' | remove '.org' | remove '.net' | trim | strtolower | ucfirst }}</a>
-		<div>
-		{{item.description | remove '...' | remove '-' | remove '*' | remove '_' | remove '?' | remove '|' | remove '@' | remove ',' | remove 'www' | remove ';' | remove '/' | remove 'html' | remove 'http' | remove '.com' | remove '.org' | remove '.net' | trim | strtolower | ucfirst }}.
-		</div>
-		</li>
-			{% endif %}{% endif %}
-			{% endfor %}
-</ul>
+    {% if videos.0.link != '' %}
+    <h2>{{ term }} Video</h2>
+                <p style="text-align:center">           
+                    <iframe class="youtube-player" type="text/html" width="80%" height="400" src="http://www.youtube.com/embed/{{ videos.0.link | get_video_id }}" frameborder="0">
+                    </iframe>           
+                </p>
 
-		</div>
-	</div>
-</article>
+<div align="center">
+<a title="download video" href="#" rel="nofollow" onClick="window.open('/download.php?yt_vid={{ videos.0.link | get_video_id }}&format=mp3','mywindow','width=445,height=130,scrollbars=no')"><span class="klik"><b>Download MP3</b></span></a> | <a title="download mp4" href="#" rel="nofollow" onClick="window.open('/download.php?yt_vid={{ videos.0.link | get_video_id }}&format=mp4','mywindow','width=445,height=130,scrollbars=no')"><span class="klik"><b>Download MP4</b></span></a>
+</div>
+                {% endif %}
+
+
+    <p>{% for index, item in api %}
+    {% if index == 4%}{{item.description | remove ' ...' | trim | strtolower | ucfirst }}. {% endif %}{% if index == 2%}{{item.description | remove ' ...' | trim | strtolower | ucfirst }}.{% endif %}{% endfor %}</p>
+    <h2>Related image with {{ term }}</h2>
+    <div id="gallery-2" class="gallery galleryid-405 gallery-columns-4 gallery-size-thumbnail">
+    {% for index, item in images %}
+    <dl class="gallery-item">
+    {% if index < 15 %}
+                    <dt class="gallery-icon landscape">
+                    <a href="{{ item.title | build_permalink_for 'tag' }}" ><img style="width:150px;height:130px" src="{{ item.mediaurl }}" alt="{{ item.title }}" title="{{ item.title }}"></a>
+                        </dt>           
+                    {% endif %}</dl>        
+    {% endfor %}</div>
+    </div>
+        </div>
+    </article>
+    <style type="text/css">
+    dt {
+    float: left;
+    width: 20%;
+    }
+    </style>
